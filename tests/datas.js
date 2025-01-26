@@ -44,6 +44,10 @@ nouveau_benif:{
 existe_deja:{
 NomPrénom: "Yasmine LOUAKED",
 RIB: '008 16001 3160004869 69'
+},
+invalid_rib:{
+NomPrénom: "Yasmine LOUAKED",
+RIB: '000 00000 0000000000 00'
 }
 };
 
