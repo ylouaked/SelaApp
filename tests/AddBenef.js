@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test'; 
 import { bénéficiaire, loginData } from './datas.js';
-import { bénéficiaire , OTP} from './datas.js';
 import { otp } from './helpers/otp.js';
 
 
@@ -67,21 +66,29 @@ export async function addBeneficiaire(page, data, OTP) {
     await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Vous n\'avez pas reçu le code?');
     await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Renvoyer le code');
     await otp(page, OTP);
-
+    await page.getByRole('button', { name: 'Valider' }).click();
    
     if (data === bénéficiaire.existe_deja) {
+       
         await expect(page.locator('#mat-dialog-3')).toContainText('Erreur Le bénéficiaire existe déjà');
         await expect(page.getByRole('button', { name: 'OK, Merci' })).toBeVisible();
         await expect(page.getByRole('button', { name: 'OK, Merci' })).toBeEnabled();
         await page.getByRole('button', { name: 'OK, Merci' }).click();
          
-    // const beneficiaryRow = page.locator(`.beneficiary-table-row:has-text("${data.NomPrénom}")`);
-    // await expect(beneficiaryRow).toBeVisible();
-    // await expect(beneficiaryRow).toContainText(data.RIB);
-    } else if (data === bénéficiaire.nouveau_benif) {
+   
+
+
+    } else if (data === bénéficiaire.nouveau_benef) {
         await expect(page.locator('#mat-dialog-3')).toContainText('Bénéficiaire ajouté avec succès');
         await page.getByRole('button', { name: 'OK, Merci' }).click();
+
+        const beneficiaryRow = page.locator(`mat-row cdk-row ng-star-inserted:has-text("${data.NomPrénom}")`);
+        await page.waitForTimeout(2000);  
+        await beneficiaryRow.waitFor({ state: 'visible', timeout: 60000 })
+    
+         await expect(beneficiaryRow).toContainText(data.RIB);
     } 
+   
 
     // switch (data) {
     //     case bénéficiaire.existe_deja:

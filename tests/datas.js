@@ -37,7 +37,7 @@ SGA:{
   NomPrénom: "OUSSAMA LAIDI",
   RIB: '021 00001 1030001525 21'
 },
-nouveau_benif:{
+nouveau_benef:{
  NomPrénom: "OUSSAMA LAIDI",
   RIB: '021 00001 1030001525 21'
 },
