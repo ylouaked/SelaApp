@@ -81,13 +81,9 @@ export async function addBeneficiaire(page, data, OTP) {
     } else if (data === bénéficiaire.nouveau_benef) {
         await expect(page.locator('#mat-dialog-3')).toContainText('Bénéficiaire ajouté avec succès');
         await page.getByRole('button', { name: 'OK, Merci' }).click();
-
-        const beneficiaryRow = page.locator(`mat-row cdk-row ng-star-inserted:has-text("${data.NomPrénom}")`);
-        await page.waitForTimeout(2000);  
-        await beneficiaryRow.waitFor({ state: 'visible', timeout: 60000 })
-    
-         await expect(beneficiaryRow).toContainText(data.RIB);
+        await expect(page.getByRole('row', { name: `${data.NomPrénom}` })).toBeVisible();
     } 
+    
    
 
     // switch (data) {

@@ -43,7 +43,8 @@ nouveau_benef:{
 },
 existe_deja:{
 NomPrénom: "Yasmine LOUAKED",
-RIB: '008 16001 3160004869 69'
+RIB: '008 16001 3160004869 69',
+newName: 'Yasmeen'
 },
 invalid_rib:{
 NomPrénom: "Yasmine LOUAKED",
