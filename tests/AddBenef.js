@@ -62,7 +62,7 @@ export async function addBeneficiaire(page, data, OTP) {
     await page.getByRole('button', { name: 'Confirmer' }).click();
 
     
-    await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Merci de saisir l\'OTP reçu sur votre numéro 0551****32');
+    await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Merci de saisir l\'OTP reçu sur votre numéro 0796****11');
     await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Vous n\'avez pas reçu le code?');
     await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Renvoyer le code');
     await otp(page, OTP);

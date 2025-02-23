@@ -4,7 +4,7 @@ import { addBeneficiaire } from './AddBenef';
 const { login } = require("./helpers/login");
 const { loginData, bénéficiaire, OTP } = require("./datas");
 
-
+test.describe('Vérifier l\'ajout d\'un bénéficiare', () => {
 test.use({
     ignoreHTTPSErrors: true, 
 });
@@ -25,4 +25,4 @@ await addBeneficiaire(page, bénéficiaire.existe_deja, OTP)
 
 test('RIB invalide', async ({ page }) => {
      await addBeneficiaire(page, bénéficiaire.invalid_rib);
- });
+ })});
