@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { loginData } from '../datas.js'; 
+import { loginData } from './datas.js'; 
 
 
 export async function login(page, data) {
@@ -7,6 +7,8 @@ export async function login(page, data) {
     await page.getByRole('button', { name: 'EN' }).click();
     await page.getByRole('menuitem', { name: 'FR' }).click();
     await page.getByPlaceholder('Identifiant').click();
+
+
      if (data === loginData.empty_user) {
        await page.getByRole('button', { name: 'Valider' }).click();
        const errorMessage = page.locator('#mat-error-0'); 
@@ -29,7 +31,6 @@ export async function login(page, data) {
   if (data === loginData.valid_data) {
     await page.getByRole('button', { name: 'Je me connecte' }).click();
     await expect(page).toHaveTitle(/Mes comptes/);
-    // await expect(page).toHaveURL('https://10.234.34.115/mes-comptes');
   } 
  
   if(data ===loginData.invalid_data  || data === loginData.invalid_user || data === loginData.invalid_psw)

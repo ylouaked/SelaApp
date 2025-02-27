@@ -1,3 +1,5 @@
+import { Virement } from "../MesVirements/VirementBenef";
+
 export const loginData ={
 
     valid_data: {
@@ -51,12 +53,18 @@ NomPrénom: "Yasmine LOUAKED",
 RIB: '000 00000 0000000000 00'
 },
 
-exist_deja_fav:{
-NomPrénom: " Madjda rezig",
-RIB: '021 00001 1030002193 54'
-}
+VirementBenef:{
+NomPrénom: " Nawel AMGHAR",
+RIB: '021 00001 1030000105 13'
+},
+
+x:{
+  NomPrénom: " x",
+  },
 
 };
 
 
 export const OTP = '666000'
+
+export const substring = "ma"

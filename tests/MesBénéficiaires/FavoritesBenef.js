@@ -9,7 +9,9 @@ export async function FavBenef(page, data) {
   await favorisButton.click();
   const retirerButton = await row.locator('button[mattooltip="Retirer des favoris"]');
   await expect(retirerButton).toBeVisible();
+  await browser.close();
 }
+ 
 
 export async function DefavBenef(page, data) {
   await page.locator('mat-list-item >> text=Mes bénéficiaires').click();
@@ -19,6 +21,7 @@ export async function DefavBenef(page, data) {
   await favorisButton.click();
   const ajouterButton = await row.locator('button[mattooltip="Ajouter aux favoris"]');
   await expect(ajouterButton).toBeVisible();
+
 }
 
 

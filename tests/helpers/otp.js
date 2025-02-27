@@ -1,6 +1,3 @@
-import { expect } from '@playwright/test';
-import { loginData } from '../datas.js'; 
-
 
 export async function otp(page, OTP) {
 

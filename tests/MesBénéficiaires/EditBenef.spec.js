@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'; 
-import { login } from './helpers/login.js';
-import { loginData,bénéficiaire } from './datas.js';
+import { login } from '../helpers/login.js';
 import { EditBenef } from './EditBenef.js';
+import { bénéficiaire, loginData } from '../helpers/datas.js';
 
 test.use({
     ignoreHTTPSErrors: true, 

@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'; 
 import { login } from './helpers/login.js';
-import { loginData } from './datas.js';
+import { loginData } from './helpers/datas.js';
 
 test.use({
     ignoreHTTPSErrors: true, 
@@ -23,7 +23,6 @@ test.use({
 test('Login avec des informations valides', async ({ page }) => {
  await login(page, loginData.valid_data);
 });
-
 
 
 test('Login avec un username invalide', async ({ page }) => {
