@@ -5,17 +5,14 @@ import { bénéficiaire, loginData, substring } from '../helpers/datas.js';
 
 
 export async function SearchBenef(page,data){
-try {
+
     await page.locator('mat-list-item >> text=Mes bénéficiaires').click();
     await expect(page).toHaveTitle(/Mes bénéficiaires/);
     await expect (page.getByPlaceholder('Rechercher')).toBeVisible();
     await (page.getByPlaceholder('Rechercher')).fill(data.NomPrénom);
     await (page.getByPlaceholder('Rechercher')).press('Enter');
     await expect(page.getByRole('cell', { name: `${data.NomPrénom}` })).toBeVisible();
-}catch (error){
-    console.error("Erreur lors de la recherche d'un bénéficiaire existant :", error);
-    // throw error; 
-} 
+
 }
 
 export async function SearchBenefX(page,data){

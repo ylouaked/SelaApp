@@ -24,6 +24,8 @@ export async function login(page, data) {
     await page.locator(`button:has-text("${number}")`).click();
     }
 
+  
+
   if (data === loginData.short_psw) {
   await expect(page.getByRole('button', { name: 'Je me connecte' })).toBeDisabled();
   }

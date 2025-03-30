@@ -20,11 +20,10 @@ await addBeneficiaire(page, bénéficiaire.existe_deja, OTP)
  } );
 
  test('Ajouter un bénéficiaire avec succès', async ({ page }) => {
-    try {
+
          await addBeneficiaire(page, bénéficiaire.existe_deja, OTP);
-    } catch (error) {
-        console.error("Erreur lors de l'ajout d'un bénéficiaire :", error);
-    }
+
+        console.error("Erreur lors de l'ajout d'un bénéficiaire :", error)
    
 
  });
