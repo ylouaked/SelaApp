@@ -10,6 +10,5 @@ export async function otp(page, OTP) {
        console.log('otp',i)
 
         }
- 
- 
+
 }

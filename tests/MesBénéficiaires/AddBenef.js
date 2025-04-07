@@ -28,19 +28,6 @@ export async function addBeneficiaire(page, data, OTP) {
         
     }
 
-
-    // switch (data) {
-    //     case bénéficiaire.rib_invalid:
-            
-    //         await expect(page.getByRole('button', { name: 'Ajouter' })).toBeDisabled();
-    //         return; 
-
-    //     default:
-         
-    //         await expect(page.getByRole('button', { name: 'Ajouter' })).toBeEnabled();
-    //         await page.getByRole('button', { name: 'Ajouter' }).click();
-    //         break;
-    // }
   
     await expect(page.getByRole('button', { name: 'Ajouter' })).toBeEnabled();
     await page.getByRole('button', { name: 'Ajouter' }).click();
@@ -79,16 +66,4 @@ export async function addBeneficiaire(page, data, OTP) {
     } 
     
    
-
-    // switch (data) {
-    //     case bénéficiaire.existe_deja:
-    //         await expect(page.locator('#mat-dialog-3')).toContainText('Erreur Le bénéficiaire existe déjà');
-    //         await page.getByRole('button', { name: 'OK, Merci' }).click();
-    //         break;
-
-    //     case bénéficiaire.nouveau_benif:
-    //         await expect(page.locator('#mat-dialog-3')).toContainText('Bénéficiaire ajouté avec succès');
-    //         await page.getByRole('button', { name: 'OK, Merci' }).click();
-    //         break;
-    // }
 }

@@ -18,14 +18,9 @@ test.beforeEach(async ({page})  => {
 test('Ajouter un bénéficiaire qui existe déjà', async ({ page }) => { 
 await addBeneficiaire(page, bénéficiaire.existe_deja, OTP)
  } );
-
+ 
  test('Ajouter un bénéficiaire avec succès', async ({ page }) => {
-
          await addBeneficiaire(page, bénéficiaire.existe_deja, OTP);
-
-        console.error("Erreur lors de l'ajout d'un bénéficiaire :", error)
-   
-
  });
 
 test('RIB invalide', async ({ page }) => {

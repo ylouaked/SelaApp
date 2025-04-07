@@ -67,4 +67,10 @@ x:{
 
 export const OTP = '666000'
 
+export async function enterPassword(page, password) {
+  for (const number of password.split('')) {
+    await page.locator(`button:has-text("${number}")`).click(); 
+  }
+}
+
 export const substring = "ma"
