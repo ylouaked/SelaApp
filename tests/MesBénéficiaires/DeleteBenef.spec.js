@@ -12,12 +12,6 @@ test.use({
 
 test('Supprimer un bénéficiaire', async({page})  => {
     await login(page, loginData.valid_data);
-    try {
-         await deleteBenef(page, bénéficiaire.existe_deja);
-    } catch (error) {
-        
-        console.error("Error  :", error);
-       
-    }
+    await deleteBenef(page, bénéficiaire.existe_deja);
    
 });

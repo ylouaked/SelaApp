@@ -6,10 +6,8 @@ test.use({
     ignoreHTTPSErrors: true, 
 });
 
-
 test('Login avec des informations valides', async ({ page }) => {
   await login(page, loginData.valid_data);
- 
 });
 
 test('Login avec un identifiant invalide', async ({ page }) => {

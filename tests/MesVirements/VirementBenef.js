@@ -43,7 +43,6 @@ export async function VirementMensuel(page,data){
     await page.getByRole('button', { name: 'Continuer' }).click();
     await page.getByRole('textbox', { name: '0,00' }).fill('2000');
     await page.getByRole('textbox', { name: 'Motif…' }).fill('Virement Mensuel');
-
     await page.getByRole('button', { name: 'Continuer' }).click();
     await expect(page.locator('app-details-virement-beneficiaire')).toContainText('Compte à débiter COMPTE COURANT 1130000001');
     await expect(page.locator('app-details-virement-beneficiaire')).toContainText('Montant 1 000,00 DZD')

@@ -4,10 +4,6 @@ import { otp } from '../helpers/otp.js';
 
 
 export async function addBeneficiaire(page, data, OTP) {
-    
-    await page.locator('mat-list-item >> text=Mes bénéficiaires').click();
-    await expect(page).toHaveTitle(/Mes bénéficiaires/);
-    await page.getByRole('button', { name: 'Ajouter un bénéficiaire' }).click();
     await expect(page.getByRole('heading')).toContainText('Ajouter un bénéficiaire');
     await expect(page.getByLabel('Nom et prénom')).toBeVisible();
     await expect(page.getByLabel('RIB')).toBeVisible();
@@ -40,7 +36,6 @@ export async function addBeneficiaire(page, data, OTP) {
 
     await expect(page.getByRole('button', { name: 'Confirmer' })).toBeEnabled();
     await page.getByRole('button', { name: 'Confirmer' }).click();
-    
     await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Merci de saisir l\'OTP reçu sur votre numéro 0551****32');
     await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Vous n\'avez pas reçu le code?');
     await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Renvoyer le code');
@@ -48,22 +43,15 @@ export async function addBeneficiaire(page, data, OTP) {
     await page.getByRole('button', { name: 'Valider' }).click();
    
     if (data === bénéficiaire.existe_deja) {
-       
         await expect(page.locator('#mat-dialog-3')).toContainText('Erreur Le bénéficiaire existe déjà');
         await expect(page.getByRole('button', { name: 'OK, Merci' })).toBeVisible();
         await expect(page.getByRole('button', { name: 'OK, Merci' })).toBeEnabled();
         await page.getByRole('button', { name: 'OK, Merci' }).click();
         await browser.close();
-         
-   
-
-
     } else if (data === bénéficiaire.nouveau_benef) {
         await expect(page.locator('#mat-dialog-3')).toContainText('Bénéficiaire ajouté avec succès');
         await page.getByRole('button', { name: 'OK, Merci' }).click();
         await expect(page.getByRole('row', { name: `${data.NomPrénom}` })).toBeVisible();
         await browser.close();
     } 
-    
-   
 }

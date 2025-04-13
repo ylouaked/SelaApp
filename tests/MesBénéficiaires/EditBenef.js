@@ -5,7 +5,6 @@ export async function EditBenef(page,data){
 
     await page.locator('mat-list-item >> text=Mes bénéficiaires').click();
     await expect(page).toHaveTitle(/Mes bénéficiaires/);
- 
      await page.getByRole('row', { name: `${data.NomPrénom} ${data.RIB}`  }).getByLabel('Example icon-button with a menu').click(); 
      await page.getByRole('menuitem', { name: 'Modifier' }).click();
      await expect(page.locator('#mat-dialog-0')).toBeVisible();
