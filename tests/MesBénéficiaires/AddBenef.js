@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test'; 
-import { bénéficiaire, loginData } from '../helpers/datas.js';
-import { otp } from '../helpers/otp.js';
+import { bénéficiaire, enterPassword, loginData, otp } from '../helpers/datas.js';
 
 
 export async function addBeneficiaire(page, data, OTP) {
@@ -14,44 +13,47 @@ export async function addBeneficiaire(page, data, OTP) {
     await page.getByLabel('RIB').click();
     await page.getByLabel('RIB').fill(data.RIB);
 
-    if (data === bénéficiaire.invalid_rib) {
-        await page.getByLabel('Nom et prénom').click();
-        await expect(page.getByRole('button', { name: 'Ajouter' })).toBeDisabled();
-        const errorMessage = page.locator('#mat-error-0'); 
-        await expect(errorMessage).toBeVisible();
-        await expect(errorMessage).toHaveText('Le RIB est invalide');
-        return;
-        
+    switch (data) {
+        case bénéficiaire.invalid_rib:
+            await expect(page.getByRole('button', { name: 'Ajouter' })).toBeDisabled();
+            await page.getByLabel('Nom et prénom').click()
+            const errorMessage = page.locator('#mat-error-0');
+            await expect(errorMessage).toBeVisible();
+            await expect(errorMessage).toHaveText('Le RIB est invalide');
+            break;
+
+        case bénéficiaire.existe_deja:
+            await expect(page.getByRole('button', { name: 'Ajouter' })).toBeEnabled();
+            await page.getByRole('button', { name: 'Ajouter' }).click();
+            await expect(page.locator('#mat-dialog-1')).toContainText('Quel est votre mot de passe?');
+            await enterPassword(page, loginData.valid_data.password);
+            await expect(page.getByRole('button', { name: 'Confirmer' })).toBeEnabled();
+            await page.getByRole('button', { name: 'Confirmer' }).click();
+            await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Merci de saisir l\'OTP reçu sur votre numéro 0796****11');
+            await otp(page, OTP); 
+            await page.getByRole('button', { name: 'Valider' }).click();
+            await expect(page.locator('#mat-dialog-3')).toContainText('Erreur Le bénéficiaire existe déjà');
+            await page.getByRole('button', { name: 'OK, Merci' }).click();
+            break;
+
+        case bénéficiaire.nouveau_benef:
+            await expect(page.getByRole('button', { name: 'Ajouter' })).toBeEnabled();
+            await page.getByRole('button', { name: 'Ajouter' }).click();
+            await expect(page.locator('#mat-dialog-1')).toContainText('Quel est votre mot de passe?');
+            await enterPassword(page, loginData.valid_data.password);
+            await expect(page.getByRole('button', { name: 'Confirmer' })).toBeEnabled();
+            await page.getByRole('button', { name: 'Confirmer' }).click();
+            await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Merci de saisir l\'OTP reçu sur votre numéro 0796****11');
+            await otp(page, OTP);
+            await page.getByRole('button', { name: 'Valider' }).click();
+            await expect(page.locator('#mat-dialog-3')).toContainText('Bénéficiaire ajouté avec succès');
+            await page.getByRole('button', { name: 'OK, Merci' }).click();
+            break;
+
+        default:
+            throw new Error('Cas non pris en charge');
     }
-
-  
-    await expect(page.getByRole('button', { name: 'Ajouter' })).toBeEnabled();
-    await page.getByRole('button', { name: 'Ajouter' }).click();
- 
-    await expect(page.locator('#mat-dialog-1')).toContainText('Quel est votre mot de passe?');
-
-   for (const number of loginData.valid_data.password) {
-        await page.locator(`button:has-text("${number}")`).click();
-     }
-
-    await expect(page.getByRole('button', { name: 'Confirmer' })).toBeEnabled();
-    await page.getByRole('button', { name: 'Confirmer' }).click();
-    await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Merci de saisir l\'OTP reçu sur votre numéro 0551****32');
-    await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Vous n\'avez pas reçu le code?');
-    await expect(page.locator('app-otp-keyboard-dialog')).toContainText('Renvoyer le code');
-    await otp(page, OTP);
-    await page.getByRole('button', { name: 'Valider' }).click();
-   
-    if (data === bénéficiaire.existe_deja) {
-        await expect(page.locator('#mat-dialog-3')).toContainText('Erreur Le bénéficiaire existe déjà');
-        await expect(page.getByRole('button', { name: 'OK, Merci' })).toBeVisible();
-        await expect(page.getByRole('button', { name: 'OK, Merci' })).toBeEnabled();
-        await page.getByRole('button', { name: 'OK, Merci' }).click();
-        await browser.close();
-    } else if (data === bénéficiaire.nouveau_benef) {
-        await expect(page.locator('#mat-dialog-3')).toContainText('Bénéficiaire ajouté avec succès');
-        await page.getByRole('button', { name: 'OK, Merci' }).click();
-        await expect(page.getByRole('row', { name: `${data.NomPrénom}` })).toBeVisible();
-        await browser.close();
-    } 
 }
+
+
+

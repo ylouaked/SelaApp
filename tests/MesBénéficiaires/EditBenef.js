@@ -14,9 +14,7 @@ export async function EditBenef(page,data){
      await page.getByRole('button', { name: 'Modifier' }).click();
      await expect(page.locator('#mat-dialog-1')).toContainText('Quel est votre mot de passe?');
     
-    for (const number of loginData.valid_data.password) {
-         await page.locator(`button:has-text("${number}")`).click();
-      }
+     await enterPassword(page, loginData.valid_data.password);
  
      await expect(page.getByRole('button', { name: 'Confirmer' })).toBeEnabled();
      await page.getByRole('button', { name: 'Confirmer' }).click();

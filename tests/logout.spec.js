@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 
 test('Déconnexion', async ({ page }) => {
    
-    await page.getByRole('button', { name: 'Matt Hudson' }).click();
+    await page.getByRole('button', { name: loginData.valid_data.Nom }).click();
     await page.getByRole('menuitem', { name: 'Déconnexion' }).click();
     await expect(page.locator('app-login')).toContainText('S’identifier à votre compte');
    

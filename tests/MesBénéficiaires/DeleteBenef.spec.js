@@ -12,6 +12,6 @@ test.use({
 
 test('Supprimer un bénéficiaire', async({page})  => {
     await login(page, loginData.valid_data);
-    await deleteBenef(page, bénéficiaire.existe_deja);
+    await deleteBenef(page, bénéficiaire.nouveau_benef);
    
 });

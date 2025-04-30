@@ -2,6 +2,7 @@ import {  test } from '@playwright/test';
 import { login, loginWithCase } from './helpers/login.js';
 import { loginData } from './helpers/datas.js';
 
+
 test.use({
     ignoreHTTPSErrors: true, 
 });
@@ -11,21 +12,21 @@ test('Login avec des informations valides', async ({ page }) => {
 });
 
 test('Login avec un identifiant invalide', async ({ page }) => {
-  await loginWithCase(page, loginData.invalid_user);
+  await login(page, loginData.invalid_user);
 });
 
 test('Login avec un mot de passe invalide', async ({ page }) => {
-  await loginWithCase(page, loginData.invalid_psw);
+  await login(page, loginData.invalid_psw);
 });
 
 test('Login avec identifiant et mot de passe invalides', async ({ page }) => {
-  await loginWithCase(page, loginData.invalid_data);
+  await login(page, loginData.invalid_data);
 });
 
 test('Login avec un mot de passe trop court', async ({ page }) => {
-  await loginWithCase(page, loginData.short_psw);
+  await login(page, loginData.short_psw);
 });
 
 test('Login avec identifiant vide' , async ({ page }) => {
-  await loginWithCase(page, loginData.empty_user);
+  await login(page, loginData.empty_user);
 });

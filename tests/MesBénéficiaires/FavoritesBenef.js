@@ -9,7 +9,6 @@ export async function FavBenef(page, data) {
   await favorisButton.click();
   const retirerButton = await row.locator('button[mattooltip="Retirer des favoris"]');
   await expect(retirerButton).toBeVisible();
-  await browser.close();
 }
  
 

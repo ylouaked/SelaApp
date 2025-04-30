@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { loginData } from "../helpers/datas";
+import { enterPassword, loginData } from "../helpers/datas";
 
 
 export async function deleteBenef(page,data){
@@ -14,24 +14,16 @@ export async function deleteBenef(page,data){
     await page.getByRole('button', { name: 'Oui, supprimer le bénéficiaire' }).click();
     //mot de passe
     await expect(page.locator('#mat-dialog-1')).toContainText('Quel est votre mot de passe?');
-       for (const number of loginData.valid_data.password) {
-            await page.locator(`button:has-text("${number}")`).click();
-         }
+    await enterPassword(page, loginData.valid_data.password);
         await expect(page.getByRole('button', { name: 'Confirmer' })).toBeEnabled();
         await page.getByRole('button', { name: 'Confirmer' }).click();
         //pop up de réussite de suppression
         await expect(page.locator('#mat-dialog-2')).toContainText('Suppression de bénéficiaire ');
-        try {
-            await expect(page.locator('#mat-dialog-2')).toContainText('Le bénéficiaire a été supprimé avec succ. OK, Merci');
-        } catch (error) {
-            console.log("le msg ne corres pas", error)
-        }
-       
+        await expect(page.locator('#mat-dialog-2')).toContainText('Le bénéficiaire a été supprimé avec succès. OK, Merci');
         await page.getByRole('button', { name: 'OK, Merci' }).click();
         await expect(page.locator('#mat-dialog-2')).toBeHidden();
         await page.reload();
         await expect(page.locator(`mat-row cdk-row ng-star-inserted:has-text("${data.NomPrénom}")`)).toHaveCount(0);
-    
     } 
 
 
